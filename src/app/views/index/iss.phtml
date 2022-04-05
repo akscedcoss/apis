@@ -1,0 +1,31 @@
+<?php
+
+echo "<h1>Hello To World Of Apis </h1>";
+
+echo PHP_EOL;
+echo "<h1>";
+echo("longitude : ".$loc->iss_position->longitude);
+echo ("latitude : ".$loc->iss_position->latitude);
+echo "</h1> <br>";
+echo "<h2> Currently ";
+echo ($people->number ." People are in Space");
+?>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name </th>
+      <th scope="col">Craft</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php 
+       foreach($people->people as $key=>$value)
+       {
+           echo " <tr><th scope='row'>$value->name</th><td>$value->craft</td> </tr>";
+       }
+      ?>
+   
+  </tbody>
+</table>
+
+

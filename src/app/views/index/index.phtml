@@ -1,10 +1,58 @@
-<?php
+<?php if (!$this->request->isPost()) {?>
+<div class="container">
+<h1 class="d-flex justify-content-center align-items-center">Hello To World Of Apis </h1>
+    <div class="row height d-flex justify-content-center align-items-center">
 
-echo "<h1>Hello To World Of Apis </h1>";
+        <div class="col-md-8">
+        <h3 class="d-flex justify-content-center align-items-center">Open Library Search Books </h3>
+            <div class="search"> <i class="fa fa-search"></i>
+            <?php echo $this->tag->form("/"); ?>
+             <input type="text" name="query" class="form-control" action="/" method ="POST"placeholder="Open Library Search Books"> <button class="btn btn-primary">Search</button> </div>
 
-echo PHP_EOL;
+            </form>
+        </div>
+    </div>
+</div>
+<?php }?>
+<!-- Now We Will Show Post Request  -->
+<?php if ($this->request->isPost()) {?>
+<div class="container">
+<h1 class="d-flex justify-content-center align-items-center"> <?php echo $res->numFound;?>  Results Found </h1>
+<div class="card-columns">
+<?php foreach ($res->docs as $key=>$value) { 
+$imglink="https://covers.openlibrary.org/b/olid/".str_replace("/books/","",$value->seed[0])."-M.jpg";
+$author=implode(",",$value->author_name);
+$first=$value->first_publish_year;
+$key=str_replace('/works/',"",$value->key) ;
+// $key=$value->cover_edition_key;
+?>
+    <div class="card md-10">
+      
+    <img class="card-img-top" src="<?php echo $imglink;?>" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><b><a href="index/detail/<?php echo $key;?>"> <?php echo $value->title ;?> </a></b></h5>
+      <p class="card-text">By <?php echo $author ;?></p>
+      <p class="card-text"><small class="text-muted">First Published <?php echo $first ;?> </small></p>
+    </div>
+  </div>
+  <?php }?>
+</div>
 
-// echo $this->tag->linkTo(
-//     '',
-//     'Sign Up Here!'
-// );
+
+
+
+
+<?php 
+// var_dump($res->docs) 
+echo "<pre>";
+foreach ($res->docs as $key=>$value)
+{   
+    
+    print_r($value->author_name) ;
+   echo "<br>";
+}
+
+?>
+
+ 
+<?php }?>
